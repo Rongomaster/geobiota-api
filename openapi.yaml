@@ -1,0 +1,109 @@
+openapi: 3.1.0
+info:
+  title: Geobiota HH API
+  version: 1.0.0
+  description: API para consultar horas cargadas por nombre, proyecto, categoría, área y fechas desde la base de datos Geobiota.
+servers:
+  - url: http://localhost:5000
+    description: Servidor local de desarrollo
+paths:
+  /hh_por_nombre:
+    get:
+      operationId: getHorasPorNombre
+      summary: Horas cargadas por nombre
+      parameters:
+        - name: nombre
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Horas agrupadas por nombre
+
+  /hh_por_proyecto:
+    get:
+      operationId: getHorasPorProyecto
+      summary: Horas cargadas por código de proyecto
+      parameters:
+        - name: codigo
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Horas agrupadas por código de proyecto
+
+  /hh_por_categoria:
+    get:
+      operationId: getHorasPorCategoria
+      summary: Horas cargadas por categoría
+      parameters:
+        - name: categoria
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Horas agrupadas por categoría
+
+  /hh_por_area:
+    get:
+      operationId: getHorasPorArea
+      summary: Horas cargadas por área
+      parameters:
+        - name: area
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Horas agrupadas por área
+
+  /filtrar_por_fecha:
+    get:
+      operationId: filtrarPorFecha
+      summary: Filtra registros por fecha
+      parameters:
+        - name: desde
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: hasta
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Registros dentro del rango de fechas
+
+  /contar_registros:
+    get:
+      operationId: contarRegistros
+      summary: Cuenta total de registros
+      responses:
+        '200':
+          description: Total de filas en la tabla
+
+  /registros:
+    get:
+      operationId: obtenerRegistros
+      summary: Obtiene los primeros 100 registros
+      responses:
+        '200':
+          description: Listado de registros
+
+  /openapi.json:
+    get:
+      operationId: obtenerOpenApiJson
+      summary: Devuelve el archivo OpenAPI JSON
+      responses:
+        '200':
+          description: Esquema OpenAPI
